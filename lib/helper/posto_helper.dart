@@ -13,10 +13,10 @@ class PostoHelper {
   // criando uma classe factory porque não será recriada sempre que chamarmos a classe BD (POO)
   factory PostoHelper() => _instance;
 
-  //Database é a classe do SQFlite que iremos usar, por isso iremos usa-la
+  //Database é a classe do SQFlite que iremos usar.
   Database _db;
 
-  // sempre que formos acessar alguma coisa utilizar o future, pois ele é uma transação alheia
+  // sempre que formos acessar alguma coisa utilizar o future, pois ele é uma transação que pode demorar.
   Future<Database> get db async {
     if (_db != null) {
       //caso exista, retorna este _bd existente
@@ -39,7 +39,7 @@ class PostoHelper {
         "c_id INTEGER PRIMARY KEY,"
         "c_nomeDoPosto TEXT,"
         "c_precoAlcool REAL,"
-        "c_precoGasolina REAL"
+        "c_precoGasolina REAL,"
         "c_horaConsulta TEXT"
         ")";
 

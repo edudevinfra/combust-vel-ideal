@@ -1,9 +1,6 @@
 import 'package:combustivel_ideal/helper/posto_helper.dart';
 import 'package:combustivel_ideal/model/posto.dart';
-import 'package:combustivel_ideal/page/home.dart';
-import 'package:combustivel_ideal/page/posto.dart';
 import 'package:flutter/material.dart';
-import 'package:date_format/date_format.dart';
 
 class PostoPage extends StatefulWidget {
 
@@ -18,22 +15,20 @@ class _PostoPageState extends State<PostoPage> {
   // para podermos pegar os postos criados
   List<Posto> lsPostos = List();
 
-
-//  void showPostoPage({Posto posto}) async {
-//    final regPosto = await Navigator.push(
-//      context,
-//      MaterialPageRoute(
-//        builder: (context) => PostoPage(posto: posto),
-//      ),
-//    );
-//    if (regPosto != null) {
-//      if (posto != null) {
-//        await helper.update(regPosto);
-//      } else {
-//        await helper.insert(regPosto);
-//      }
-//    }
-//  }
+  void showPostoPage({Posto posto}) async {
+    final regPosto = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PostoPage()),
+    );
+    if (regPosto != null) {
+      if (posto != null) {
+        await helper.update(regPosto);
+      } else {
+        await helper.insert(regPosto);
+      }
+      loadAllPostos();
+    }
+  }
 
   void loadAllPostos() {
     helper.selectAll().then((list) {
@@ -61,9 +56,10 @@ class _PostoPageState extends State<PostoPage> {
 
   Widget buildCardPosto(BuildContext context, int index) {
     return GestureDetector(
-      child: Card(
+      child: Card(color: Colors.green,
         child: Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(08.0),
+
           child: Row(
             children: <Widget>[
               Padding(
@@ -72,23 +68,18 @@ class _PostoPageState extends State<PostoPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Posto: " + lsPostos[index].nomeDoPosto,
-                      style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.white,
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
-                    Text("Preço do álcool: " +
-                        lsPostos[index].precoAlcool.toString(),
-                      style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                    Text("Preço do Àlcool: R\$ " + lsPostos[index].precoAlcool.toStringAsFixed(2),
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
-                    Text("Preço da gasolina: " +
-                        lsPostos[index].precoGasolina.toString(),
-                      style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
-                  ),
-                  Text("Consulta realizada em " + (formatDate(lsPostos[index].horaConsulta, [ dd, '/', mm, '/', yyyy +  "ás" + HH, ":", mm, ":", ss, "."])),
-                    style: TextStyle(
-                       fontSize: 16.0, fontWeight: FontWeight.bold),
-                 ),
+                    Text("Preço da Gasolina: R\$ " + lsPostos[index].precoGasolina.toStringAsFixed(2),
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                    Text("Consulta realizada em " + lsPostos[index].horaConsulta,
+                      style: TextStyle(fontSize: 11.0, fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
               ),
@@ -120,7 +111,7 @@ class _PostoPageState extends State<PostoPage> {
                       ),
                       onPressed: () {
                         Navigator.pop(context);
-//                        showPostoPage(posto: lsPostos[index]);
+                        //showPostoPage(posto: lsPostos[index]);
                       },
                     ),
                     FlatButton(

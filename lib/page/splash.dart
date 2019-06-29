@@ -17,40 +17,45 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    Text titulo = Text(
+      "EDMM COMBUSTÍVEIS",
+      style: TextStyle(fontSize: 25.0, color: Colors.green),
+    );
+
+    Text version = Text(
+      "version 1.0",
+      style: TextStyle(fontSize: 10.0, color: Colors.black),
+    );
+
+    Container img = Container(
+      child: Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 60.0),
-            child: Text(
-              "EDMM COMBUSTÍVEIS",
-              style: TextStyle(fontSize: 30.0, color: Colors.green),
-              textAlign: TextAlign.center,
+
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/logo_splash.png")),
             ),
           ),
-          Column(
-
-            children: <Widget>[
-              Container(
-                width: 140,
-                height: 140,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/logo_splash.png")),
-                ),
-              ),
-              Container(
-                margin: EdgeInsetsDirectional.zero,
-                child: Text(
-                "version 1.0",
-                style: TextStyle(fontSize: 10.0, color: Colors.green),
-                textAlign: TextAlign.center,
-              ),
-              ),
-            ],
-          )
         ],
       ),
     );
+
+    Container container = Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: titulo,
+        ), img, version],
+      ),
+    );
+
+    Scaffold scaffold = Scaffold(
+      body: container,
+    );
+
+    return scaffold;
   }
 }

@@ -1,12 +1,11 @@
 import 'package:date_format/date_format.dart';
+
 class Posto {
   int id;
   String nomeDoPosto;
   double precoAlcool;
   double precoGasolina;
-  String horaConsulta ;
-
-
+  String horaConsulta = formatDate(DateTime.now(),[dd,"/",M,"/",yyyy, " às ",  H,":",mm,":",ss," hs"]);
 
   // criando um construtor vazio
   Posto();
@@ -43,7 +42,7 @@ class Posto {
         "nomeDoPosto: $nomeDoPosto, "
         "precoAlcool: $precoAlcool, "
         "precoGasolina: $precoGasolina, "
-        "horaConsulta: $horaConsulta"
+        "horaConsulta: $horaConsulta "
     "]";
   }
 }
